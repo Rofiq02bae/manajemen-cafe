@@ -52,3 +52,14 @@ def update_view(request, task_id):
         form = TaskForm(instance=task)
 
     return render(request, 'todo/form.html', {'form': form})
+ 
+def delete_view(request, task_id):
+    try:
+        task = Task.objects.get(pk=task_id)
+        task.delete()
+        messages.success(request, 'Sukses menghapus task')
+        return redirect('todo:index')
+    except Task.DoesNotExist:
+        raise Http404("Task not found")
+    
+    
