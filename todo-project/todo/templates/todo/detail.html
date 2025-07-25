@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Detail Task</h1>
+    <div>
+        <a href="{% url 'todo:index' %}" class="btn btn-success">Kembali ke daftar</a>
+    </div>
+    <br>
+    <div>
+        <h2>{{ task.title }}</h2>
+        <h4><span class="badge badge-warning">{{ task.status }}</span></h4>
+        <p>
+            {{task.description}}
+        </p>
+    </div>
+</div>
+{% endblock %}

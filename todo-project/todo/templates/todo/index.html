@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Daftar Task</h1>
+
+    <!-- <div>
+        <a href="#" class="btn btn-success">Tambah Task</a>
+    </div> -->
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message | safe }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div>
+        <a href="{% url 'todo:create' %}" class="btn btn-success">Tambah Task</a>
+    </div>
+    <br>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th width="50">ID</th>
+                <th width="300">Judul</th>
+                <th width="100">Deskripsi</th>
+                <th width="100">Status</th>
+                <th width="100">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if tasks %}
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.status }}</td>
+                    <td>
+                        <a href="{% url 'todo:detail' task.id %}" class="btn btn-primary">Detail</a>
+                        <a href="{% url 'todo:update' task.id %}" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-danger">Hapus</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="5">Data tidak ditemukan</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
